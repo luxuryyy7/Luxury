@@ -1,159 +1,526 @@
-<!-- 
-  Completely commented code for dummies. Use this code however you like. Att: luxuryyy7
--->
 <!doctype html>
 <html lang="es">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Luxury — Inicio</title>
-  <meta name="description" content="Luxury — Descargas y proyectos de luxuryyy7 (MCPE 0.15.10)" />
-
-  <!-- Tailwind (Play CDN) -->
+  <meta name="description" content="Luxury — Plugins y proyectos de luxuryyy7 (MCPE 0.15.x / 1.1.x)" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-
-  <!-- AOS -->
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-
-  <!-- Anime.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-
   <style>
     :root{
-      --gold: #D4AF37;
-      --black: #0b0b0b;
-      --white: #ffffff;
+      --gold:#D4AF37;
+      --gold-dark:#b78f2a;
+      --bg-1:#040405;
+      --bg-2:#0f0f0f;
+      --glass:rgba(255,255,255,0.03);
     }
-    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;background:linear-gradient(180deg,#050505 0%,#0f0f0f 100%);color:var(--white);min-height:100vh}
-    /* glass card */
-    .glass{background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));border:1px solid rgba(212,175,55,0.08);backdrop-filter: blur(6px)}
-    /* gold glow */
-    .gold-glow{box-shadow:0 6px 30px rgba(212,175,55,0.06)}
-    /* hamburger focus */
-    .hamburger:focus{outline:none}
+    html,body{height:100%;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;margin:0}
+    body{
+      background:radial-gradient(900px 400px at 10% 6%, rgba(212,175,55,0.03), transparent),linear-gradient(180deg,var(--bg-1),var(--bg-2));
+      color:#fff;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;scroll-behavior:smooth;
+    }
+    .glass{background:linear-gradient(180deg,var(--glass), rgba(255,255,255,0.01));border:1px solid rgba(212,175,55,0.06);backdrop-filter: blur(6px)}
+    .fav{background:linear-gradient(135deg,var(--gold),#e6c85a);color:#000}
+    .gold-glow{box-shadow:0 10px 40px rgba(212,175,55,0.06)}
+    header{position:sticky;top:12px;z-index:70}
+    .nav-text{cursor:pointer;transition:color .18s}
+    .nav-text:hover{color:var(--gold)}
+    .hb-btn{width:46px;height:46px;display:inline-flex;align-items:center;justify-content:center}
+    .hb-line{display:block;width:18px;height:2px;background:currentColor;border-radius:2px;transition:transform .35s cubic-bezier(.2,.9,.2,1),opacity .2s}
+    .hb-open .l1{transform: translateY(6px) rotate(45deg)}
+    .hb-open .l2{opacity:0}
+    .hb-open .l3{transform: translateY(-6px) rotate(-45deg)}
+    #mobileOverlay{transition: transform .42s cubic-bezier(.2,.9,.2,1),opacity .25s}
+    .hidden-on-desktop{display:block}
+    @media (min-width:768px){ .hidden-on-desktop{display:none} }
+    .accordion-item{border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.03)}
+    .acc-btn{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;background:transparent;border:0;padding:0;text-align:left}
+    .acc-title{font-weight:700}
+    .acc-content{max-height:0;overflow:hidden;transition:max-height 420ms cubic-bezier(.2,.9,.2,1),padding 300ms}
+    .acc-open .acc-content{padding:16px}
+    .download-btn{background:linear-gradient(90deg,var(--gold),var(--gold-dark));color:#000}
+    .chip{font-size:.72rem;padding:.25rem .5rem;border-radius:999px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.02)}
+    main{padding-top:28px;padding-bottom:48px}
+    .lang-panel{min-width:220px}
+    .lang-item{cursor:pointer;padding:8px 10px;border-radius:8px;display:flex;justify-content:space-between;align-items:center}
+    .lang-item:hover{background:rgba(255,255,255,0.02)}
+    .overlay-blur{position:fixed;inset:0;backdrop-filter: blur(6px);background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:90;opacity:0;pointer-events:none;transition:opacity .22s}
+    .overlay-blur.show{opacity:1;pointer-events:auto}
+    .overlay-card{background:rgba(255,255,255,0.02);padding:26px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);text-align:center}
+    .toast-wrap{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:95;display:flex;flex-direction:column;gap:8px}
+    .toast{background:rgba(0,0,0,0.6);padding:8px 14px;border-radius:999px;color:white;font-size:13px;border:1px solid rgba(255,255,255,0.03)}
+    .muted{color:#9ca3af}
   </style>
 </head>
-<body class="flex items-center justify-center p-6">
-
-  <!-- Header -->
-  <header class="fixed top-0 left-0 right-0 h-16 flex items-center justify-between px-4 md:px-8 z-50 glass">
-    <div class="flex items-center gap-3">
-      <div class="w-10 h-10 rounded-lg flex items-center justify-center gold-glow" style="background:linear-gradient(135deg,var(--gold),#e6c85a);">
-        <span class="text-black font-extrabold">L</span>
-      </div>
-      <div class="hidden sm:block">
-        <span class="text-sm font-semibold">Luxury</span>
-        <div class="text-xs text-gray-300">luxuryyy7</div>
-      </div>
-    </div>
-
-    <button id="hamburger" aria-label="Abrir menú" class="hamburger p-2 rounded-lg focus:ring-2 focus:ring-offset-2 focus:ring-yellow-400">
-      <!-- simple hamburger -->
-      <svg id="hbIcon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="text-white">
-        <path d="M3 12h18M3 6h18M3 18h18" />
-      </svg>
-    </button>
-  </header>
-
-  <!-- Overlay Nav -->
-  <nav id="overlay" class="fixed inset-0 bg-black/80 backdrop-blur-sm transform -translate-x-full transition-transform duration-400 z-40" style="display:none;">
-    <div class="flex items-center justify-end p-6">
-      <button id="closeNav" aria-label="Cerrar" class="p-2 rounded-md bg-white/5">Cerrar</button>
-    </div>
-    <div class="flex flex-col items-center justify-center h-full gap-6">
-      <a href="about.html" class="text-3xl font-bold" data-aos="fade-up">About</a>
-      <a href="links.html" class="text-3xl font-bold" data-aos="fade-up" data-aos-delay="100">Links</a>
-      <a href="plugins.html" class="text-3xl font-bold" data-aos="fade-up" data-aos-delay="200">Plugins</a>
-    </div>
-  </nav>
-
-  <!-- Main content -->
-  <main class="w-full max-w-4xl text-center mt-12">
-    <section class="min-h-[60vh] flex flex-col items-center justify-center gap-8">
-
-      <!-- Big title -->
-      <h1 id="luxTitle" class="text-7xl md:text-9xl font-extrabold leading-none tracking-tight bg-clip-text text-transparent" style="background-image:linear-gradient(90deg,#f7e9c8,var(--gold));">Luxury</h1>
-      <p class="text-sm text-gray-300/80">Proyectos y descargas — luxuryyy7 (MCPE 0.15.10)</p>
-
-      <!-- Card -->
-      <div class="mt-6 w-full max-w-xl glass rounded-2xl p-6 gold-glow" data-aos="zoom-in">
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <a href="about.html" class="block py-4 px-3 rounded-lg border border-transparent hover:border-yellow-400 transition-shadow shadow-sm hover:shadow-md">
-            <div class="text-sm font-semibold">About</div>
-            <div class="text-xs text-gray-300 mt-1">Quién soy y qué hago</div>
-          </a>
-
-          <a href="links.html" class="block py-4 px-3 rounded-lg border border-transparent hover:border-yellow-400 transition-shadow shadow-sm hover:shadow-md">
-            <div class="text-sm font-semibold">Links</div>
-            <div class="text-xs text-gray-300 mt-1">YouTube, GitHub, Discord</div>
-          </a>
-
-          <a href="plugins.html" class="block py-4 px-3 rounded-lg border border-transparent hover:border-yellow-400 transition-shadow shadow-sm hover:shadow-md">
-            <div class="text-sm font-semibold">Plugins</div>
-            <div class="text-xs text-gray-300 mt-1">Descargas y versiones</div>
-          </a>
+<body>
+  <header class="mx-auto max-w-5xl px-4">
+    <div class="flex items-center justify-between py-2">
+      <div class="flex items-center gap-3">
+        <div class="w-12 h-12 rounded-xl fav flex items-center justify-center font-extrabold gold-glow">L</div>
+        <div class="hidden sm:block">
+          <div class="text-sm font-semibold">Luxury</div>
+          <div class="text-xs muted" id="brandSubtitle">luxuryyy7</div>
         </div>
       </div>
+      <nav class="hidden md:flex items-center gap-6 text-sm">
+        <div class="nav-text" data-scroll="#about" id="navAbout">About</div>
+        <div class="nav-text" data-scroll="#plugins" id="navPlugins">Plugins</div>
+        <div class="nav-text" data-scroll="#links" id="navLinks">Links</div>
+      </nav>
+      <div class="flex items-center gap-2">
+        <div id="langSelector" class="relative">
+          <button id="langBtn" class="py-1 px-3 glass rounded-md text-sm" aria-haspopup="true" aria-expanded="false">ES</button>
+          <div id="langPanel" class="absolute right-0 mt-2 glass rounded-md p-2 lang-panel hidden" role="menu" aria-hidden="true"></div>
+        </div>
+        <div class="hidden-on-desktop">
+          <button id="hamburger" class="hb-btn glass rounded-lg text-white" aria-label="Abrir menú">
+            <span class="hb-line l1"></span>
+            <span style="display:inline-block;width:6px"></span>
+            <span class="hb-line l2"></span>
+            <span style="display:inline-block;width:6px"></span>
+            <span class="hb-line l3"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
 
+  <div id="mobileOverlay" class="fixed inset-0 z-50 pointer-events-none opacity-0" style="transform:translateX(100%)">
+    <div id="mobileBackdrop" class="absolute inset-0 bg-black/70"></div>
+    <aside class="absolute right-0 top-0 h-full w-[88%] max-w-xs glass p-6 flex flex-col gap-6">
+      <div class="flex items-center justify-between">
+        <div>
+          <div class="text-lg font-semibold" id="menuTitle">Menu</div>
+          <div class="text-xs muted">Luxury</div>
+        </div>
+        <button id="closeMobile" class="p-2 rounded-md bg-white/5">Cerrar</button>
+      </div>
+      <nav class="flex flex-col gap-4 mt-2">
+        <a href="#about" class="text-base font-medium" data-mobile-nav>About</a>
+        <a href="#plugins" class="text-base font-medium" data-mobile-nav>Plugins</a>
+        <a href="#links" class="text-base font-medium" data-mobile-nav>Links</a>
+      </nav>
+    </aside>
+  </div>
+
+  <main class="mx-auto max-w-5xl px-4">
+    <section id="plugins" class="mt-6" data-aos="fade-up">
+      <h2 class="text-3xl font-extrabold mb-4" id="pluginsTitle">Plugins</h2>
+      <p class="text-sm muted mb-6" id="pluginsSubtitle">Tocá un plugin para ver la descripción completa, comandos, permisos y descargar.</p>
+      <div id="pluginsContainer" class="space-y-4">Cargando plugins...</div>
     </section>
 
-    <!-- Footer small -->
-    <footer class="mt-12 text-center text-xs text-gray-400">© <span id="year"></span> Luxury — luxuryyy7</footer>
+    <section id="links" class="mt-12" data-aos="fade-up">
+      <h2 class="text-2xl font-extrabold mb-4" id="linksTitle">Links</h2>
+      <div class="glass rounded-2xl p-6 gold-glow max-w-xl" data-aos="zoom-in">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <a href="https://www.youtube.com/@luxuryyy7" target="_blank" rel="noopener" class="block py-3 px-4 rounded-lg bg-white/5 hover:bg-white/6 transition" id="linksYoutube">YouTube — @luxuryyy7</a>
+          <a href="https://github.com/luxuryyy7/" target="_blank" rel="noopener" class="block py-3 px-4 rounded-lg bg-white/5 hover:bg-white/6 transition" id="linksGitHub">GitHub — luxuryyy7</a>
+          <div class="block py-3 px-4 rounded-lg bg-white/5 flex items-center justify-between">
+            <div>
+              <div class="text-sm font-semibold" id="linksDiscord">Discord</div>
+              <div class="text-xs muted">luxuryyy7</div>
+            </div>
+            <div class="text-xs muted" id="linksContact">Contacto</div>
+          </div>
+          <a href="https://github.com/luxuryyy7/Luxury/" id="repoLink" class="block py-3 px-4 rounded-lg bg-white/5 hover:bg-white/6 transition">Repo del sitio</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="mt-12" data-aos="fade-up">
+      <h2 class="text-2xl font-extrabold mb-4" id="aboutTitle">About</h2>
+      <div class="glass rounded-2xl p-6 gold-glow max-w-3xl" data-aos="fade-right">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <div>
+            <div class="text-lg font-bold">Mateo “Luxury”</div>
+            <div class="text-sm muted" id="aboutSubtitle">Desarrollador de plugins para MCPE</div>
+          </div>
+          <div class="flex gap-2 flex-wrap">
+            <span class="chip">MCPE 0.15.x</span>
+            <span class="chip">MCPE 1.1.x</span>
+            <span class="chip">PocketMine 2 / PocketMine 3</span>
+            <span class="chip">PHP5 / PHP7</span>
+          </div>
+        </div>
+        <p class="text-sm muted mt-4" id="aboutText">Hago plugins orientados a servidores reales: tiendas, eventos, mobs y utilidades. Subo demos en YouTube y publico repos con instrucciones. Trabajo para compatibilidad en PM2 y PM3.</p>
+        <div class="mt-6 flex gap-3">
+          <a href="#plugins" class="py-2 px-3 rounded-md glass">Ver plugins</a>
+          <a href="https://www.youtube.com/@luxuryyy7" target="_blank" class="py-2 px-3 rounded-md fav">YouTube</a>
+          <a href="https://github.com/luxuryyy7/" target="_blank" class="py-2 px-3 rounded-md glass">GitHub</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="mt-12 text-center text-xs muted">© <span id="year"></span> Luxury — luxuryyy7</div>
   </main>
 
+  <div id="overlayBlur" class="overlay-blur">
+    <div class="overlay-card">
+      <div id="overlayLine1" class="text-lg font-semibold">Recargando página</div>
+      <div id="overlayLine2" class="text-sm muted">Aplicando idioma</div>
+    </div>
+  </div>
+
+  <div id="toastWrap" class="toast-wrap"></div>
+
   <script>
-    // Init AOS
     document.addEventListener('DOMContentLoaded', function(){
-      AOS.init({duration:600,once:true});
+      var allUi = {
+        es:{
+          nav_about:"About",nav_plugins:"Plugins",nav_links:"Links",
+          plugins_title:"Plugins",plugins_sub:"Tocá un plugin para ver la descripción completa, comandos, permisos y descargar.",
+          links_title:"Links",links_youtube:"YouTube — @luxuryyy7",links_github:"GitHub — luxuryyy7",links_discord:"Discord",links_contact:"Contacto",links_repo:"Repo del sitio",
+          about_title:"About",about_sub:"Desarrollador de plugins para MCPE",about_text:"Hago plugins orientados a servidores reales: tiendas, eventos, mobs y utilidades. Subo demos en YouTube y publico repos con instrucciones. Trabajo para compatibilidad en PM2 y PM3.",
+          plugins_description_label:"Descripción",plugins_commands_label:"Comandos",plugins_permissions_label:"Permisos",plugins_installation_label:"Instalación / Notas",plugins_download:"Descargar",plugins_repo_btn:"Ver repo",
+          loading:"Cargando plugins...",loadError:"No se pudo cargar plugins.json. Asegurate de abrir el sitio desde un servidor o que el archivo exista.",
+          lang_btn:"ES",menu_applying1:"Recargando página",menu_applying2:"Aplicando idioma",toast_same:"Idioma ya seleccionado",toast_busy:"Acción en curso, espera",toast_applied:"Idioma aplicado"
+        },
+        en:{
+          nav_about:"About",nav_plugins:"Plugins",nav_links:"Links",
+          plugins_title:"Plugins",plugins_sub:"Tap a plugin to see full description, commands, permissions and download.",
+          links_title:"Links",links_youtube:"YouTube — @luxuryyy7",links_github:"GitHub — luxuryyy7",links_discord:"Discord",links_contact:"Contact",links_repo:"Site repo",
+          about_title:"About",about_sub:"MCPE plugins developer",about_text:"I make plugins focused on real servers: shops, events, mobs and utilities. I publish demos on YouTube and repos with instructions. I support PM2 and PM3.",
+          plugins_description_label:"Description",plugins_commands_label:"Commands",plugins_permissions_label:"Permissions",plugins_installation_label:"Installation / Notes",plugins_download:"Download",plugins_repo_btn:"View repo",
+          loading:"Loading plugins...",loadError:"Could not load plugins.json. Make sure you're serving the site or the file exists.",
+          lang_btn:"EN",menu_applying1:"Reloading page",menu_applying2:"Applying language",toast_same:"Language already selected",toast_busy:"Action in progress, wait",toast_applied:"Language applied"
+        },
+        pt:{
+          nav_about:"Sobre",nav_plugins:"Plugins",nav_links:"Links",
+          plugins_title:"Plugins",plugins_sub:"Toque um plugin para ver descrição completa, comandos, permissões e download.",
+          links_title:"Links",links_youtube:"YouTube — @luxuryyy7",links_github:"GitHub — luxuryyy7",links_discord:"Discord",links_contact:"Contato",links_repo:"Repositório do site",
+          about_title:"Sobre",about_sub:"Desenvolvedor de plugins MCPE",about_text:"Faço plugins voltados para servidores reais: lojas, eventos, mobs e utilitários. Pubblico demos no YouTube e repositórios com instruções. Suporto PM2 e PM3.",
+          plugins_description_label:"Descrição",plugins_commands_label:"Comandos",plugins_permissions_label:"Permissões",plugins_installation_label:"Instalação / Notas",plugins_download:"Baixar",plugins_repo_btn:"Ver repo",
+          loading:"Carregando plugins...",loadError:"Não foi possível carregar plugins.json. Abra via servidor ou verifique o arquivo.",
+          lang_btn:"PT",menu_applying1:"Recarregando a página",menu_applying2:"Aplicando idioma",toast_same:"Idioma já selecionado",toast_busy:"Ação em andamento, aguarde",toast_applied:"Idioma aplicado"
+        },
+        tr:{
+          nav_about:"Hakkında",nav_plugins:"Eklentiler",nav_links:"Linkler",
+          plugins_title:"Eklentiler",plugins_sub:"Tam açıklama, komutlar, izinler ve indirme için bir eklentiye dokunun.",
+          links_title:"Linkler",links_youtube:"YouTube — @luxuryyy7",links_github:"GitHub — luxuryyy7",links_discord:"Discord",links_contact:"İletişim",links_repo:"Site deposu",
+          about_title:"Hakkında",about_sub:"MCPE eklenti geliştiricisi",about_text:"Gerçek sunuculara yönelik eklentiler yapıyorum: dükkanlar, etkinlikler, canavarlar ve yardımcı araçlar. YouTube'da demolar yayınlıyorum ve talimatlı depolar paylaşıyorum. PM2 ve PM3 destekliyorum.",
+          plugins_description_label:"Açıklama",plugins_commands_label:"Komutlar",plugins_permissions_label:"İzinler",plugins_installation_label:"Kurulum / Notlar",plugins_download:"İndir",plugins_repo_btn:"Repo'yu gör",
+          loading:"Eklentiler yükleniyor...",loadError:"plugins.json yüklenemedi. Siteyi bir sunucuda çalıştırdığınızdan emin olun veya dosyanın mevcut olduğundan emin olun.",
+          lang_btn:"TR",menu_applying1:"Sayfa yenileniyor",menu_applying2:"Dil uygulanıyor",toast_same:"Dil zaten seçili",toast_busy:"İşlem sürüyor, bekleyin",toast_applied:"Dil uygulandı"
+        },
+        ru:{
+          nav_about:"О сайте",nav_plugins:"Плагины",nav_links:"Ссылки",
+          plugins_title:"Плагины",plugins_sub:"Нажмите на плагин, чтобы увидеть описание, команды, разрешения и загрузку.",
+          links_title:"Ссылки",links_youtube:"YouTube — @luxuryyy7",links_github:"GitHub — luxuryyy7",links_discord:"Discord",links_contact:"Контакт",links_repo:"Репозиторий сайта",
+          about_title:"О сайте",about_sub:"Разработчик плагинов MCPE",about_text:"Я создаю плагины для реальных серверов: магазины, события, мобы и утилиты. Публикую демонстрации на YouTube и репозитории с инструкциями. Поддерживаю PM2 и PM3.",
+          plugins_description_label:"Описание",plugins_commands_label:"Команды",plugins_permissions_label:"Разрешения",plugins_installation_label:"Установка / Примечания",plugins_download:"Скачать",plugins_repo_btn:"Посмотреть репо",
+          loading:"Загрузка плагинов...",loadError:"Не удалось загрузить plugins.json. Убедитесь, что файл существует и вы запускаете сайт через сервер.",
+          lang_btn:"RU",menu_applying1:"Перезагрузка страницы",menu_applying2:"Применение языка",toast_same:"Язык уже выбран",toast_busy:"Действие выполняется, подождите",toast_applied:"Язык применён"
+        },
+        de:{
+          nav_about:"Über",nav_plugins:"Plugins",nav_links:"Links",
+          plugins_title:"Plugins",plugins_sub:"Tippe ein Plugin an, um die vollständige Beschreibung, Befehle, Berechtigungen und den Download zu sehen.",
+          links_title:"Links",links_youtube:"YouTube — @luxuryyy7",links_github:"GitHub — luxuryyy7",links_discord:"Discord",links_contact:"Kontakt",links_repo:"Repo der Seite",
+          about_title:"Über",about_sub:"MCPE-Plugin-Entwickler",about_text:"Ich erstelle Plugins für echte Server: Shops, Events, Mobs und Utilities. Ich veröffentliche Demos auf YouTube und Repos mit Anleitungen. Ich unterstütze PM2 und PM3.",
+          plugins_description_label:"Beschreibung",plugins_commands_label:"Befehle",plugins_permissions_label:"Berechtigungen",plugins_installation_label:"Installation / Hinweise",plugins_download:"Herunterladen",plugins_repo_btn:"Repo anzeigen",
+          loading:"Plugins werden geladen...",loadError:"plugins.json konnte nicht geladen werden. Bitte lokal per Server öffnen oder Datei prüfen.",
+          lang_btn:"DE",menu_applying1:"Seite wird neu geladen",menu_applying2:"Sprache wird angewendet",toast_same:"Sprache bereits gewählt",toast_busy:"Aktion läuft, warte",toast_applied:"Sprache angewendet"
+        },
+        fr:{
+          nav_about:"À propos",nav_plugins:"Plugins",nav_links:"Liens",
+          plugins_title:"Plugins",plugins_sub:"Touchez un plugin pour voir la description complète, les commandes, les permissions et le téléchargement.",
+          links_title:"Liens",links_youtube:"YouTube — @luxuryyy7",links_github:"GitHub — luxuryyy7",links_discord:"Discord",links_contact:"Contact",links_repo:"Repo du site",
+          about_title:"À propos",about_sub:"Développeur de plugins MCPE",about_text:"Je crée des plugins pour des serveurs réels : boutiques, événements, mobs et utilitaires. Je publie des démos sur YouTube et des dépôts avec des instructions. Je supporte PM2 et PM3.",
+          plugins_description_label:"Description",plugins_commands_label:"Commandes",plugins_permissions_label:"Permissions",plugins_installation_label:"Installation / Notes",plugins_download:"Télécharger",plugins_repo_btn:"Voir le repo",
+          loading:"Chargement des plugins...",loadError:"Impossible de charger plugins.json. Vérifiez que le fichier existe et que le site est servi par un serveur.",
+          lang_btn:"FR",menu_applying1:"Rechargement de la page",menu_applying2:"Application de la langue",toast_same:"Langue déjà sélectionnée",toast_busy:"Action en cours, attendez",toast_applied:"Langue appliquée"
+        },
+        it:{
+          nav_about:"Informazioni",nav_plugins:"Plugin",nav_links:"Link",
+          plugins_title:"Plugin",plugins_sub:"Tocca un plugin per vedere descrizione completa, comandi, permessi e download.",
+          links_title:"Link",links_youtube:"YouTube — @luxuryyy7",links_github:"GitHub — luxuryyy7",links_discord:"Discord",links_contact:"Contatto",links_repo:"Repo del sito",
+          about_title:"Informazioni",about_sub:"Sviluppatore plugin MCPE",about_text:"Creo plugin per server reali: negozi, eventi, mob e utilità. Pubblico demo su YouTube e repository con istruzioni. Supporto PM2 e PM3.",
+          plugins_description_label:"Descrizione",plugins_commands_label:"Comandi",plugins_permissions_label:"Permessi",plugins_installation_label:"Installazione / Note",plugins_download:"Scarica",plugins_repo_btn:"Vedi repo",
+          loading:"Caricamento plugin...",loadError:"Impossibile caricare plugins.json. Esegui il sito da un server o verifica il file.",
+          lang_btn:"IT",menu_applying1:"Ricaricamento pagina",menu_applying2:"Applicazione lingua",toast_same:"Lingua già selezionata",toast_busy:"Azione in corso, attendere",toast_applied:"Lingua applicata"
+        }
+      };
 
-      // year
-      document.getElementById('year').textContent = new Date().getFullYear();
+      var supported = Object.keys(allUi);
+      var lang = localStorage.getItem('lux_lang') || 'es';
+      if(supported.indexOf(lang) === -1) lang = 'es';
 
-      // Anime.js entrance for title
-      anime.timeline({loop:false})
-        .add({
-          targets: '#luxTitle',
-          scale: [0.9,1],
-          opacity: [0,1],
-          duration: 700,
-          easing: 'easeOutCubic'
-        })
-        .add({
-          targets: '#luxTitle',
-          translateY: [-8,0],
-          duration: 600,
-          easing: 'easeOutElastic(1, .6)'
-        }, '-=200');
+      function u(key){
+        return (allUi[lang] && allUi[lang][key]) ? allUi[lang][key] : allUi['es'][key];
+      }
 
-      // hamburger logic
-      const hb = document.getElementById('hamburger');
-      const overlay = document.getElementById('overlay');
-      const closeNav = document.getElementById('closeNav');
+      function applyUiTexts(){
+        var el;
+        el = document.getElementById('brandSubtitle'); if(el) el.textContent = 'luxuryyy7';
+        el = document.getElementById('navAbout'); if(el) el.textContent = u('nav_about');
+        el = document.getElementById('navPlugins'); if(el) el.textContent = u('nav_plugins');
+        el = document.getElementById('navLinks'); if(el) el.textContent = u('nav_links');
+        el = document.getElementById('pluginsTitle'); if(el) el.textContent = u('plugins_title');
+        el = document.getElementById('pluginsSubtitle'); if(el) el.textContent = u('plugins_sub');
+        el = document.getElementById('linksTitle'); if(el) el.textContent = u('links_title');
+        el = document.getElementById('linksYoutube'); if(el) el.textContent = u('links_youtube');
+        el = document.getElementById('linksGitHub'); if(el) el.textContent = u('links_github');
+        el = document.getElementById('linksDiscord'); if(el) el.textContent = u('links_discord');
+        el = document.getElementById('linksContact'); if(el) el.textContent = u('links_contact');
+        el = document.getElementById('repoLink'); if(el) el.textContent = u('links_repo');
+        el = document.getElementById('aboutTitle'); if(el) el.textContent = u('about_title');
+        el = document.getElementById('aboutSubtitle'); if(el) el.textContent = u('about_sub');
+        el = document.getElementById('aboutText'); if(el) el.textContent = u('about_text');
+        var lb = document.getElementById('langBtn'); if(lb) lb.textContent = allUi[lang]['lang_btn'] || lang.toUpperCase();
+        var year = document.getElementById('year'); if(year) year.textContent = new Date().getFullYear();
+      }
 
-      function openNav(){
-        overlay.style.display = 'block';
-        overlay.classList.remove('-translate-x-full');
-        overlay.classList.add('translate-x-0');
-        // animate links
-        document.querySelectorAll('#overlay a').forEach((el,i)=>{
-          el.style.transform = 'translateY(10px)';
-          el.style.opacity = '0';
-          setTimeout(()=>{ el.style.transform = ''; el.style.opacity='1'; }, 80*i);
+      applyUiTexts();
+
+      try{ if(window.AOS && typeof window.AOS.init === 'function'){ window.AOS.init({duration:600, once:true}); } }catch(e){}
+      try{ if(window.anime && typeof window.anime === 'function'){ window.anime({targets:'.fav',scale:[0.9,1],duration:700,easing:'easeOutElastic(1, .6)'}); } }catch(e){}
+
+      var langPanel = document.getElementById('langPanel');
+      var langNames = { es:"Español", en:"English", pt:"Português", tr:"Türkçe", ru:"Русский", de:"Deutsch", fr:"Français", it:"Italiano" };
+      supported.forEach(function(code){
+        var div = document.createElement('div');
+        div.className = 'lang-item';
+        div.innerHTML = '<div>'+langNames[code]+'</div><div style="font-size:12px;color:var(--gold)">'+code.toUpperCase()+'</div>';
+        div.addEventListener('click', function(){ chooseLanguage(code); });
+        if(langPanel) langPanel.appendChild(div);
+      });
+
+      var panelOpen = false;
+      var langBtn = document.getElementById('langBtn');
+      if(langBtn){
+        langBtn.addEventListener('click', function(){
+          panelOpen = !panelOpen;
+          if(langPanel) langPanel.classList.toggle('hidden', !panelOpen);
+          langBtn.setAttribute('aria-expanded', panelOpen ? 'true' : 'false');
         });
       }
-      function closeNavFn(){
-        overlay.classList.remove('translate-x-0');
-        overlay.classList.add('-translate-x-full');
-        setTimeout(()=> overlay.style.display='none', 300);
+
+      document.addEventListener('click', function(e){
+        var sel = document.getElementById('langSelector');
+        if(!sel) return;
+        if(!sel.contains(e.target)){
+          panelOpen = false;
+          if(langPanel) langPanel.classList.add('hidden');
+          if(langBtn) langBtn.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      function showToast(msg){
+        var wrap = document.getElementById('toastWrap'); if(!wrap) return;
+        var el = document.createElement('div'); el.className = 'toast'; el.textContent = msg; wrap.appendChild(el);
+        setTimeout(function(){ el.style.opacity = '0'; setTimeout(function(){ if(wrap.contains(el)) wrap.removeChild(el); },220); },2000);
       }
 
-      hb.addEventListener('click', ()=>{ openNav(); });
-      closeNav.addEventListener('click', ()=>{ closeNavFn(); });
+      var overlay = document.getElementById('overlayBlur');
+      var overlayLine1 = document.getElementById('overlayLine1');
+      var overlayLine2 = document.getElementById('overlayLine2');
+      var applyInProgress = false;
 
-      // close on ESC
-      document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeNavFn(); });
+      function chooseLanguage(code){
+        if(applyInProgress){ showToast(u('toast_busy')); return; }
+        if(code === lang){ showToast(u('toast_same')); return; }
+        applyInProgress = true;
+        if(langPanel) langPanel.classList.add('hidden');
+        if(langBtn) langBtn.setAttribute('aria-expanded','false');
+        overlayLine1.textContent = (allUi[code] && allUi[code]['menu_applying1']) ? allUi[code]['menu_applying1'] : allUi['es']['menu_applying1'];
+        overlayLine2.textContent = (allUi[code] && allUi[code]['menu_applying2']) ? allUi[code]['menu_applying2'] : allUi['es']['menu_applying2'];
+        if(overlay) overlay.classList.add('show');
+        setTimeout(function(){
+          try{ localStorage.setItem('lux_lang', code); }catch(e){}
+          try{ if(langBtn) langBtn.textContent = allUi[code]['lang_btn'] || code.toUpperCase(); }catch(e){}
+          setTimeout(function(){ window.location.reload(); },600);
+        },350);
+      }
+
+      var hamburger = document.getElementById('hamburger');
+      var mobileOverlay = document.getElementById('mobileOverlay');
+      var mobileBackdrop = document.getElementById('mobileBackdrop');
+      var closeMobile = document.getElementById('closeMobile');
+      var mobileOpen = false;
+      function openMobile(){ mobileOpen = true; if(hamburger) hamburger.classList.add('hb-open'); if(mobileOverlay){ mobileOverlay.style.transform='translateX(0)'; mobileOverlay.style.opacity='1'; mobileOverlay.style.pointerEvents='auto'; } }
+      function closeMobileFn(){ mobileOpen = false; if(hamburger) hamburger.classList.remove('hb-open'); if(mobileOverlay){ mobileOverlay.style.transform='translateX(100%)'; mobileOverlay.style.opacity='0'; mobileOverlay.style.pointerEvents='none'; } }
+      if(hamburger) hamburger.addEventListener('click', function(){ mobileOpen ? closeMobileFn() : openMobile(); });
+      if(closeMobile) closeMobile.addEventListener('click', closeMobileFn);
+      if(mobileBackdrop) mobileBackdrop.addEventListener('click', closeMobileFn);
+      document.querySelectorAll('[data-mobile-nav]').forEach(function(a){ a.addEventListener('click', function(){ closeMobileFn(); }); });
+      document.querySelectorAll('.nav-text').forEach(function(el){ el.addEventListener('click', function(){ var target = el.getAttribute('data-scroll'); if(!target) return; var node = document.querySelector(target); if(node) node.scrollIntoView({behavior:'smooth', block:'start'}); if(mobileOpen) closeMobileFn(); }); });
+
+      function localized(p, field){
+        if(!p) return '';
+        var key = field + '_i18n';
+        if(p[key] && typeof p[key] === 'object' && p[key][lang]) return p[key][lang];
+        if(p[field]) return p[field];
+        return '';
+      }
+
+      function localizedCommands(p){
+        var arr = [];
+        if(!p.commands) return arr;
+        p.commands.forEach(function(c){
+          var desc = (c.desc_i18n && c.desc_i18n[lang]) ? c.desc_i18n[lang] : (c.desc || '');
+          arr.push({cmd: c.cmd || '', desc: desc});
+        });
+        return arr;
+      }
+
+      function makePluginCard(p){
+        var wrap = document.createElement('article');
+        wrap.className = 'accordion-item glass rounded-2xl p-0';
+        var btn = document.createElement('button');
+        btn.className = 'acc-btn w-full px-5 py-4 text-left';
+        btn.setAttribute('aria-expanded','false');
+        var left = document.createElement('div');
+        left.className = 'flex items-center gap-3';
+        var ico = document.createElement('div');
+        ico.className = 'w-10 h-10 rounded-md bg-white/5 flex items-center justify-center font-bold';
+        ico.textContent = ((p.name||'').split(' ')[0].slice(0,2).toUpperCase()) || 'PL';
+        var txt = document.createElement('div');
+        var title = document.createElement('div');
+        title.className = 'acc-title';
+        title.textContent = p.name || 'Plugin';
+        var sub = document.createElement('div');
+        sub.className = 'text-xs muted';
+        sub.textContent = (p.short_i18n && p.short_i18n[lang]) ? p.short_i18n[lang] : (p.short || '');
+        txt.appendChild(title); txt.appendChild(sub);
+        left.appendChild(ico); left.appendChild(txt);
+        var right = document.createElement('div');
+        right.className = 'flex items-center gap-3';
+        var ver = document.createElement('span');
+        ver.className = 'text-xs muted';
+        ver.textContent = 'v' + (p.version || '') + ' • ' + (p.compat || '');
+        var svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+        svg.setAttribute('class','icon w-5 h-5 muted');
+        svg.setAttribute('viewBox','0 0 24 24');
+        svg.setAttribute('fill','none');
+        var path = document.createElementNS('http://www.w3.org/2000/svg','path');
+        path.setAttribute('d','M12 5v14');
+        path.setAttribute('stroke','currentColor');
+        path.setAttribute('stroke-width','2');
+        path.setAttribute('stroke-linecap','round');
+        svg.appendChild(path);
+        right.appendChild(ver); right.appendChild(svg);
+        btn.appendChild(left); btn.appendChild(right);
+        wrap.appendChild(btn);
+        var content = document.createElement('div');
+        content.className = 'acc-content px-5';
+        var inner = document.createElement('div');
+        inner.style.padding = '16px';
+        var grid = document.createElement('div');
+        grid.className = 'grid md:grid-cols-2 gap-4';
+        var col1 = document.createElement('div');
+        var hdesc = document.createElement('h3');
+        hdesc.className = 'font-semibold';
+        hdesc.textContent = allUi[lang]['plugins_description_label'] || allUi['es']['plugins_description_label'];
+        var pdesc = document.createElement('p');
+        pdesc.className = 'text-sm muted mt-2';
+        pdesc.textContent = localized(p, 'description');
+        col1.appendChild(hdesc); col1.appendChild(pdesc);
+        var hcmd = document.createElement('h4');
+        hcmd.className = 'font-medium mt-4';
+        hcmd.textContent = allUi[lang]['plugins_commands_label'] || allUi['es']['plugins_commands_label'];
+        col1.appendChild(hcmd);
+        var ulcmd = document.createElement('ul');
+        ulcmd.className = 'list-disc list-inside text-sm muted mt-2';
+        var cmds = localizedCommands(p);
+        cmds.forEach(function(c){
+          var li = document.createElement('li');
+          li.innerHTML = '<code>' + (c.cmd || '') + '</code> — ' + (c.desc || '');
+          ulcmd.appendChild(li);
+        });
+        col1.appendChild(ulcmd);
+        var hperm = document.createElement('h4');
+        hperm.className = 'font-medium mt-4';
+        hperm.textContent = allUi[lang]['plugins_permissions_label'] || allUi['es']['plugins_permissions_label'];
+        col1.appendChild(hperm);
+        var ulperm = document.createElement('ul');
+        ulperm.className = 'list-disc list-inside text-sm muted mt-2';
+        (p.permissions || []).forEach(function(pp){
+          var li = document.createElement('li');
+          li.innerHTML = '<code>' + pp + '</code>';
+          ulperm.appendChild(li);
+        });
+        col1.appendChild(ulperm);
+        var col2 = document.createElement('div');
+        var hinst = document.createElement('h4');
+        hinst.className = 'font-medium';
+        hinst.textContent = allUi[lang]['plugins_installation_label'] || allUi['es']['plugins_installation_label'];
+        col2.appendChild(hinst);
+        var ol = document.createElement('ol');
+        ol.className = 'list-decimal list-inside text-sm muted mt-2';
+        var inst = (p.installation_i18n && p.installation_i18n[lang]) ? p.installation_i18n[lang] : (p.installation || []);
+        inst.forEach(function(i){
+          var li = document.createElement('li');
+          li.textContent = i;
+          ol.appendChild(li);
+        });
+        col2.appendChild(ol);
+        var controls = document.createElement('div');
+        controls.className = 'mt-6 flex gap-3';
+        var dl = document.createElement('a');
+        dl.className = 'download-btn py-2 px-4 rounded-lg shadow';
+        dl.href = p.download || '#';
+        dl.target = '_blank';
+        dl.rel = 'noopener';
+        dl.textContent = allUi[lang]['plugins_download'] || allUi['es']['plugins_download'];
+        var repo = document.createElement('a');
+        repo.className = 'py-2 px-4 rounded-lg border border-white/6 text-sm';
+        repo.href = p.repo || '#';
+        repo.target = '_blank';
+        repo.rel = 'noopener';
+        repo.textContent = allUi[lang]['plugins_repo_btn'] || allUi['es']['plugins_repo_btn'];
+        controls.appendChild(dl); controls.appendChild(repo);
+        col2.appendChild(controls);
+        grid.appendChild(col1); grid.appendChild(col2);
+        inner.appendChild(grid); content.appendChild(inner); wrap.appendChild(content);
+
+        btn.addEventListener('click', function(){
+          var isOpen = wrap.classList.contains('acc-open');
+          if(isOpen){
+            content.style.maxHeight = 0;
+            wrap.classList.remove('acc-open');
+            btn.setAttribute('aria-expanded','false');
+          } else {
+            document.querySelectorAll('.accordion-item.acc-open').forEach(function(openItem){
+              openItem.classList.remove('acc-open');
+              var c = openItem.querySelector('.acc-content');
+              if(c) c.style.maxHeight = 0;
+              var ab = openItem.querySelector('.acc-btn');
+              if(ab) ab.setAttribute('aria-expanded','false');
+            });
+            wrap.classList.add('acc-open');
+            content.style.maxHeight = content.scrollHeight + 'px';
+            btn.setAttribute('aria-expanded','true');
+            try{ if(window.anime && typeof window.anime === 'function'){ window.anime({ targets: content.querySelectorAll('h3,h4,p,li,ol,.download-btn,a'), translateY:[8,0], opacity:[0,1], delay: window.anime ? window.anime.stagger(30) : 0, duration:420, easing:'easeOutCubic' }); } }catch(e){}
+          }
+        });
+
+        return wrap;
+      }
+
+      var pluginsContainer = document.getElementById('pluginsContainer');
+      if(pluginsContainer) pluginsContainer.textContent = allUi[lang]['loading'] || 'Cargando plugins...';
+
+      fetch('plugins.json').then(function(r){ return r.json(); }).then(function(list){
+        if(!pluginsContainer) return;
+        pluginsContainer.innerHTML = '';
+        list.forEach(function(p, idx){
+          var card = makePluginCard(p);
+          pluginsContainer.appendChild(card);
+          if(idx === 0){
+            var btn = card.querySelector('.acc-btn');
+            if(btn) btn.click();
+          }
+        });
+      }).catch(function(){
+        if(pluginsContainer) pluginsContainer.innerHTML = '';
+        var errEl = document.createElement('div'); errEl.className = 'text-sm muted';
+        errEl.textContent = allUi[lang]['loadError'] || allUi['es']['loadError'];
+        if(pluginsContainer) pluginsContainer.appendChild(errEl);
+      });
 
     });
   </script>

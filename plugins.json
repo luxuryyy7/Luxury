@@ -1,0 +1,148 @@
+[
+  {
+    "id": "powerscripts",
+    "name": "PowerScripts",
+    "version": "1.2",
+    "compat": "PM2/PM3",
+    "targets": [
+      "MCPE 0.15.x",
+      "MCPE 1.1.x"
+    ],
+    "short": "Development/ops plugin to execute PHP scripts from server console.",
+    "short_i18n": {
+      "es": "Plugin para ejecutar scripts PHP desde la consola del servidor.",
+      "en": "Plugin to execute PHP scripts from the server console.",
+      "pt": "Plugin para executar scripts PHP a partir do console do servidor.",
+      "tr": "Sunucu konsolundan PHP betikleri çalıştırmak için eklenti.",
+      "ru": "Плагин для запуска PHP-скриптов из консоли сервера.",
+      "de": "Plugin zum Ausführen von PHP-Skripten von der Serverkonsole.",
+      "fr": "Plugin pour exécuter des scripts PHP depuis la console du serveur.",
+      "it": "Plugin per eseguire script PHP dalla console del server."
+    },
+
+    "description": "PowerScripts lets server operators and developers execute PHP scripts (including PocketMine API) directly from the server console. Intended for rapid prototyping, scheduled tasks and testing. Not for running untrusted code in production without review.",
+    "description_i18n": {
+      "es": "PowerScripts permite a operadores y desarrolladores ejecutar scripts PHP (incluyendo API de PocketMine) directamente desde la consola del servidor. Pensado para prototipado rápido, tareas programadas y testing. No usar con código no verificado en producción.",
+      "en": "PowerScripts lets server operators and developers execute PHP scripts (including PocketMine API) directly from the server console. Intended for rapid prototyping, scheduled tasks and testing. Not for running untrusted code in production without review.",
+      "pt": "PowerScripts permite que operadores e desenvolvedores executem scripts PHP (incluindo API do PocketMine) diretamente do console do servidor. Destinado a prototipagem rápida, tarefas agendadas e testes. Não use código não confiável em produção sem revisão.",
+      "tr": "PowerScripts, sunucu operatörlerinin ve geliştiricilerin PHP betiklerini (PocketMine API dahil) doğrudan sunucu konsolundan çalıştırmasına olanak tanır. Hızlı prototipleme, zamanlanmış görevler ve test içindir. İncelenmemiş kodu üretimde çalıştırmayın.",
+      "ru": "PowerScripts позволяет операторам и разработчикам сервера запускать PHP-скрипты (включая PocketMine API) прямо из консоли сервера. Предназначен для быстрой прототипизации, планируемых задач и тестирования. Не запускать непроверенный код в продакшне.",
+      "de": "PowerScripts ermöglicht es Serverbetreibern und Entwicklern, PHP-Skripte (einschließlich PocketMine-API) direkt von der Serverkonsole auszuführen. Für schnelles Prototyping, geplante Aufgaben und Tests gedacht. Nicht dazu verwenden, nicht vertrauenswürdigen Code produktiv auszuführen.",
+      "fr": "PowerScripts permet aux opérateurs et développeurs d'exécuter des scripts PHP (y compris l'API PocketMine) directement depuis la console du serveur. Destiné au prototypage rapide, aux tâches planifiées et aux tests. Ne pas exécuter de code non vérifié en production.",
+      "it": "PowerScripts consente agli operatori e agli sviluppatori del server di eseguire script PHP (inclusa l'API PocketMine) direttamente dalla console del server. Destinato a prototipazione rapida, attività programmate e testing. Non usare codice non verificato in produzione."
+    },
+    "commands": [
+      {
+        "cmd": "!setup",
+        "desc": "Scan scripts folder and register valid scripts",
+        "desc_i18n": {
+          "es": "Escanea la carpeta de scripts y registra los scripts válidos",
+          "en": "Scan the scripts folder and register valid scripts",
+          "pt": "Verifica a pasta de scripts e registra scripts válidos",
+          "tr": "Betik klasörünü tarar ve geçerli betikleri kaydeder",
+          "ru": "Сканирует папку скриптов и регистрирует валидные скрипты",
+          "de": "Scannt den Script-Ordner und registriert gültige Skripte",
+          "fr": "Analyse le dossier de scripts et enregistre les scripts valides",
+          "it": "Scansiona la cartella degli script e registra gli script validi"
+        }
+      },
+      {
+        "cmd": "!list",
+        "desc": "List available scripts",
+        "desc_i18n": {
+          "es": "Lista los scripts disponibles",
+          "en": "List available scripts",
+          "pt": "Lista scripts disponíveis",
+          "tr": "Kullanılabilir betikleri listeler",
+          "ru": "Показывает доступные скрипты",
+          "de": "Listet verfügbare Skripte auf",
+          "fr": "Affiche les scripts disponibles",
+          "it": "Elenca gli script disponibili"
+        }
+      },
+      {
+        "cmd": "!exe <script.php>",
+        "desc": "Execute a script; behavior depends on return value",
+        "desc_i18n": {
+          "es": "Ejecuta un script; el comportamiento depende del valor devuelto",
+          "en": "Execute a script; behavior depends on return value",
+          "pt": "Executa um script; o comportamento depende do valor retornado",
+          "tr": "Bir betik çalıştırır; davranış döndürülen değere bağlıdır",
+          "ru": "Выполняет скрипт; поведение зависит от возвращаемого значения",
+          "de": "Führt ein Skript aus; Verhalten hängt vom Rückgabewert ab",
+          "fr": "Exécute un script ; le comportement dépend de la valeur de retour",
+          "it": "Esegue uno script; il comportamento dipende dal valore restituito"
+        }
+      },
+      {
+        "cmd": "!install list default",
+        "desc": "Show bundled default scripts",
+        "desc_i18n": {
+          "es": "Muestra scripts por defecto incluidos",
+          "en": "Show bundled default scripts",
+          "pt": "Mostra scripts padrão empacotados",
+          "tr": "Paketlenmiş varsayılan betikleri gösterir",
+          "ru": "Показывает встроенные скрипты по умолчанию",
+          "de": "Zeigt gebündelte Standard-Skripte",
+          "fr": "Affiche les scripts par défaut inclus",
+          "it": "Mostra gli script predefiniti inclusi"
+        }
+      },
+      {
+        "cmd": "!install default <script.php>",
+        "desc": "Install a bundled default script into data/scripts/",
+        "desc_i18n": {
+          "es": "Instala un script por defecto en data/scripts/",
+          "en": "Install a bundled default script into data/scripts/",
+          "pt": "Instala um script padrão empacotado em data/scripts/",
+          "tr": "Paketlenmiş bir varsayılan betiği data/scripts/ içine kurar",
+          "ru": "Устанавливает встроенный скрипт в data/scripts/",
+          "de": "Installiert ein gebündeltes Standard-Skript in data/scripts/",
+          "fr": "Installe un script par défaut empaqueté dans data/scripts/",
+          "it": "Installa uno script predefinito incluso in data/scripts/"
+        }
+      },
+      {
+        "cmd": "!install default all",
+        "desc": "Install all bundled defaults",
+        "desc_i18n": {
+          "es": "Instala todos los scripts por defecto incluidos",
+          "en": "Install all bundled defaults",
+          "pt": "Instala todos os padrões empacotados",
+          "tr": "Tüm paketlenmiş varsayılanları kurar",
+          "ru": "Устанавливает все встроенные скрипты",
+          "de": "Installiert alle gebündelten Standard-Skripte",
+          "fr": "Installe tous les scripts par défaut",
+          "it": "Installa tutti gli script predefiniti"
+        }
+      }
+    ],
+    "permissions": [
+      "powerscripts.admin",
+      "powerscripts.use"
+    ],
+    "installation": [
+      "Put the PowerScripts plugin into plugins/ (PHAR or folder)",
+      "Start or restart the server to extract any packaged default scripts",
+      "Ensure plugins/PowerScripts/ is writable",
+      "Place scripts in plugins/PowerScripts/data/scripts/ or use install commands"
+    ],
+    "installation_i18n": {
+      "es": [
+        "Colocar PowerScripts en plugins/ (PHAR o carpeta)",
+        "Reiniciar el servidor para extraer los scripts por defecto si existen",
+        "Asegurar que plugins/PowerScripts/ sea escribible",
+        "Poner scripts en plugins/PowerScripts/data/scripts/ o usar comandos de install"
+      ],
+      "en": [
+        "Put the PowerScripts plugin into plugins/ (PHAR or folder)",
+        "Start or restart the server to extract any packaged default scripts",
+        "Make sure plugins/PowerScripts/ is writable",
+        "Place scripts in plugins/PowerScripts/data/scripts/ or use install commands"
+      ]
+    },
+    "notes": "Running arbitrary code is dangerous. Review scripts before running them.",
+    "download": "https://github.com/luxuryyy7/PowerScripts/",
+    "repo": "https://github.com/luxuryyy7/Luxury/"
+  }
+]
