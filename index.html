@@ -1,0 +1,161 @@
+<!-- 
+  Completely commented code for dummies. Use this code however you like. Att: luxuryyy7
+-->
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Luxury — Inicio</title>
+  <meta name="description" content="Luxury — Descargas y proyectos de luxuryyy7 (MCPE 0.15.10)" />
+
+  <!-- Tailwind (Play CDN) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+  <!-- AOS -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+  <!-- Anime.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+
+  <style>
+    :root{
+      --gold: #D4AF37;
+      --black: #0b0b0b;
+      --white: #ffffff;
+    }
+    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;background:linear-gradient(180deg,#050505 0%,#0f0f0f 100%);color:var(--white);min-height:100vh}
+    /* glass card */
+    .glass{background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));border:1px solid rgba(212,175,55,0.08);backdrop-filter: blur(6px)}
+    /* gold glow */
+    .gold-glow{box-shadow:0 6px 30px rgba(212,175,55,0.06)}
+    /* hamburger focus */
+    .hamburger:focus{outline:none}
+  </style>
+</head>
+<body class="flex items-center justify-center p-6">
+
+  <!-- Header -->
+  <header class="fixed top-0 left-0 right-0 h-16 flex items-center justify-between px-4 md:px-8 z-50 glass">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-lg flex items-center justify-center gold-glow" style="background:linear-gradient(135deg,var(--gold),#e6c85a);">
+        <span class="text-black font-extrabold">L</span>
+      </div>
+      <div class="hidden sm:block">
+        <span class="text-sm font-semibold">Luxury</span>
+        <div class="text-xs text-gray-300">luxuryyy7</div>
+      </div>
+    </div>
+
+    <button id="hamburger" aria-label="Abrir menú" class="hamburger p-2 rounded-lg focus:ring-2 focus:ring-offset-2 focus:ring-yellow-400">
+      <!-- simple hamburger -->
+      <svg id="hbIcon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="text-white">
+        <path d="M3 12h18M3 6h18M3 18h18" />
+      </svg>
+    </button>
+  </header>
+
+  <!-- Overlay Nav -->
+  <nav id="overlay" class="fixed inset-0 bg-black/80 backdrop-blur-sm transform -translate-x-full transition-transform duration-400 z-40" style="display:none;">
+    <div class="flex items-center justify-end p-6">
+      <button id="closeNav" aria-label="Cerrar" class="p-2 rounded-md bg-white/5">Cerrar</button>
+    </div>
+    <div class="flex flex-col items-center justify-center h-full gap-6">
+      <a href="about.html" class="text-3xl font-bold" data-aos="fade-up">About</a>
+      <a href="links.html" class="text-3xl font-bold" data-aos="fade-up" data-aos-delay="100">Links</a>
+      <a href="plugins.html" class="text-3xl font-bold" data-aos="fade-up" data-aos-delay="200">Plugins</a>
+    </div>
+  </nav>
+
+  <!-- Main content -->
+  <main class="w-full max-w-4xl text-center mt-12">
+    <section class="min-h-[60vh] flex flex-col items-center justify-center gap-8">
+
+      <!-- Big title -->
+      <h1 id="luxTitle" class="text-7xl md:text-9xl font-extrabold leading-none tracking-tight bg-clip-text text-transparent" style="background-image:linear-gradient(90deg,#f7e9c8,var(--gold));">Luxury</h1>
+      <p class="text-sm text-gray-300/80">Proyectos y descargas — luxuryyy7 (MCPE 0.15.10)</p>
+
+      <!-- Card -->
+      <div class="mt-6 w-full max-w-xl glass rounded-2xl p-6 gold-glow" data-aos="zoom-in">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <a href="about.html" class="block py-4 px-3 rounded-lg border border-transparent hover:border-yellow-400 transition-shadow shadow-sm hover:shadow-md">
+            <div class="text-sm font-semibold">About</div>
+            <div class="text-xs text-gray-300 mt-1">Quién soy y qué hago</div>
+          </a>
+
+          <a href="links.html" class="block py-4 px-3 rounded-lg border border-transparent hover:border-yellow-400 transition-shadow shadow-sm hover:shadow-md">
+            <div class="text-sm font-semibold">Links</div>
+            <div class="text-xs text-gray-300 mt-1">YouTube, GitHub, Discord</div>
+          </a>
+
+          <a href="plugins.html" class="block py-4 px-3 rounded-lg border border-transparent hover:border-yellow-400 transition-shadow shadow-sm hover:shadow-md">
+            <div class="text-sm font-semibold">Plugins</div>
+            <div class="text-xs text-gray-300 mt-1">Descargas y versiones</div>
+          </a>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Footer small -->
+    <footer class="mt-12 text-center text-xs text-gray-400">© <span id="year"></span> Luxury — luxuryyy7</footer>
+  </main>
+
+  <script>
+    // Init AOS
+    document.addEventListener('DOMContentLoaded', function(){
+      AOS.init({duration:600,once:true});
+
+      // year
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      // Anime.js entrance for title
+      anime.timeline({loop:false})
+        .add({
+          targets: '#luxTitle',
+          scale: [0.9,1],
+          opacity: [0,1],
+          duration: 700,
+          easing: 'easeOutCubic'
+        })
+        .add({
+          targets: '#luxTitle',
+          translateY: [-8,0],
+          duration: 600,
+          easing: 'easeOutElastic(1, .6)'
+        }, '-=200');
+
+      // hamburger logic
+      const hb = document.getElementById('hamburger');
+      const overlay = document.getElementById('overlay');
+      const closeNav = document.getElementById('closeNav');
+
+      function openNav(){
+        overlay.style.display = 'block';
+        overlay.classList.remove('-translate-x-full');
+        overlay.classList.add('translate-x-0');
+        // animate links
+        document.querySelectorAll('#overlay a').forEach((el,i)=>{
+          el.style.transform = 'translateY(10px)';
+          el.style.opacity = '0';
+          setTimeout(()=>{ el.style.transform = ''; el.style.opacity='1'; }, 80*i);
+        });
+      }
+      function closeNavFn(){
+        overlay.classList.remove('translate-x-0');
+        overlay.classList.add('-translate-x-full');
+        setTimeout(()=> overlay.style.display='none', 300);
+      }
+
+      hb.addEventListener('click', ()=>{ openNav(); });
+      closeNav.addEventListener('click', ()=>{ closeNavFn(); });
+
+      // close on ESC
+      document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeNavFn(); });
+
+    });
+  </script>
+</body>
+</html>
